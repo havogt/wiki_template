@@ -25,15 +25,26 @@ jobs:
         git checkout -b $branch_name
         git push origin $branch_name
     
-    - uses: repo-sync/pull-request@v2
+    - name: Initialize Pull Request
+      uses: gha-utilities/init-pull-request@v0.1.9
       with:
-        source_branch: "${{ env.branch_name }}"
-        destination_branch: "master"
-        pr_title: "From wiki edit ${{ env.branch_name }}"
-        pr_body: "Opened from wiki edit"
-        pr_draft: false
-        pr_allow_empty: true
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        verbose: true
+        pull_request_token: ${{ secrets.GITHUB_TOKEN }}
+        head: ${{ env.branch_name }}
+        base: master
+        title: 'From wiki edit ${{ env.branch_name }}'
+        body: >
+          Opened from wiki edit.
+            
+#     - uses: repo-sync/pull-request@v2
+#       with:
+#         source_branch: "${{ env.branch_name }}"
+#         destination_branch: "master"
+#         pr_title: "From wiki edit ${{ env.branch_name }}"
+#         pr_body: "Opened from wiki edit"
+#         pr_draft: false
+#         pr_allow_empty: true
+#         github_token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: revert changes to wiki
       run: |
