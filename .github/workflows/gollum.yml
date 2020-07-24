@@ -18,8 +18,7 @@ jobs:
         git fetch wiki
 
     - run: |
-        echo "field: ${{ github.event.client_payload.repository.name }}"
-        echo "field: ${{ github.event }}"
+        echo "field: ${{ github.event.repository.name }}"
 
     - name: push branch
       run: |
