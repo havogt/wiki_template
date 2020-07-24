@@ -19,7 +19,7 @@ jobs:
 
     - run: |
         echo "field: ${{ github.event.client_payload.repository.name }}"
-        echo "field: ${{ github.event.client_payload.repository.name }}"
+        echo "field: ${{ github.event }}"
 
     - name: push branch
       run: |
