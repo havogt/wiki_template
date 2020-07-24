@@ -15,5 +15,5 @@ jobs:
     
     - name: debug2
       run: |
-        echo ${{ GITHUB_SHA }}
-        echo ${{ GITHUB_REF }}
+        echo ${GITHUB_SHA}
+        echo ${GITHUB_REF}
