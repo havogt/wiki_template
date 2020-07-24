@@ -29,9 +29,10 @@ jobs:
       with:
         source_branch: "${{ env.branch_name }}"
         destination_branch: "master"
-        pr_title: "From wiki edit"
+        pr_title: "From wiki edit ${{ env.branch_name }}"
         pr_body: "Opened from wiki edit"
         pr_draft: false
+        pr_allow_empty: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: revert changes to wiki
