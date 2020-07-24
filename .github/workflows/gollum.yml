@@ -18,11 +18,11 @@ jobs:
         git fetch wiki
 
     - run: |
-        echo "field: ${{ github.event.pages[0].sha }}"
+        echo "field: ${{ github.event.pages[0].sha }}" # how can you edit multiple pages?
 
     - name: push branch
       run: |
-        git checkout wiki/master
+        git checkout ${{ github.event.pages[0].sha }}
         export branch_name=$(mktemp -u pr_XXXXXXXXXXXXXX)
         echo "::set-env name=branch_name::${branch_name}"
         git checkout -b $branch_name
@@ -32,7 +32,7 @@ jobs:
       with:
         source_branch: "${{ env.branch_name }}"
         destination_branch: "master"
-        pr_title: "From wiki edit ${{ env.branch_name }}"
+        pr_title: "Edited ${{ github.event.pages[0].title }}"
         pr_body: "Opened from wiki edit"
         pr_draft: false
         pr_allow_empty: true
