@@ -18,7 +18,7 @@ jobs:
         git fetch wiki
 
     - run: |
-        echo "field: ${{ github.event.repository.name }}"
+        echo "field: ${{ github.event.pages[0].sha }}"
 
     - name: push branch
       run: |
