@@ -10,8 +10,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
     - name: publish to wiki
       run: |
         git remote add wiki https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/havogt/wiki_template.wiki.git
-        git push wiki master --force
+        git push wiki master
