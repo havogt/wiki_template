@@ -11,4 +11,5 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: debug
-      run: git log
+      run: git remove -vv
+
