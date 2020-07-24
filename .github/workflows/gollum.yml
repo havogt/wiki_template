@@ -21,20 +21,15 @@ jobs:
       run: |
         git checkout ${GITHUB_SHA}
         export branch_name=$(mktemp -u pr_XXXXXXXXXXXXXX)
-        echo "::set-env name=branch_name::${branch_name}"
+        echo "::set-env name=PULL_REQUEST_FROM_BRANCH::${branch_name}"
         git checkout -b $branch_name
         git push origin $branch_name
     
-    - name: Initialize Pull Request
-      uses: gha-utilities/init-pull-request@v0.1.9
-      with:
-        verbose: true
-        pull_request_token: ${{ secrets.GITHUB_TOKEN }}
-        head: ${{ env.branch_name }}
-        base: master
-        title: 'From wiki edit ${{ env.branch_name }}'
-        body: >
-          Opened from wiki edit.
+    - name: pull-request-action
+      uses: vsoch/pull-request-action@1.0.6
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        PULL_REQUEST_BRANCH: "master"
             
 #     - uses: repo-sync/pull-request@v2
 #       with:
