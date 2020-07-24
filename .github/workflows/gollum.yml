@@ -12,4 +12,8 @@ jobs:
 
     - name: debug
       run: git remove -vv
-
+    
+    - name: debug2
+      run: |
+        echo ${{ GITHUB_SHA }}
+        echo ${{ GITHUB_REF }}
