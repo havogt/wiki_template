@@ -9,9 +9,30 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
 
-    - name: open PR
-      run: echo "TODO"
+    - name: setup repop
+      run: |
+        git remote add wiki https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/havogt/wiki_template.wiki.git
+        git fetch wiki
+
+    - name: push branch
+      run: |
+        git checkout ${GITHUB_SHA}
+        export branch_name=$(mktemp -u pr_XXXXXXXXXXXXXX)
+        echo "::set-env name=branch_name::${branch_name}
+        git checkout -b $branch_name
+        git push origin $branch_name
+    
+    - uses: repo-sync/pull-request@v2
+      with:
+        source_branch: "${branch_name}"
+        destination_branch: "master"
+        pr_title: "From wiki edit"
+        pr_body: "Opened from wiki edit"
+        pr_draft: false
+        github_token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: revert changes to wiki
       run: |
