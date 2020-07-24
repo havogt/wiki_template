@@ -1,0 +1,17 @@
+name: publish
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: publish to wiki
+      run: |
+        git remote add wiki git@github.com:havogt/wiki_template.wiki.git
+        git push wiki master
