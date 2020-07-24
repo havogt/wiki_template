@@ -1,0 +1,14 @@
+name: wiki_edited
+
+on:
+  gollum
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: debug
+      run: git log
