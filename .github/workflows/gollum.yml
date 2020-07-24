@@ -27,7 +27,7 @@ jobs:
     
     - uses: repo-sync/pull-request@v2
       with:
-        source_branch: "${branch_name}"
+        source_branch: ${branch_name}
         destination_branch: "master"
         pr_title: "From wiki edit"
         pr_body: "Opened from wiki edit"
@@ -35,6 +35,4 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
     
     - name: revert changes to wiki
-      run: |
-        git remote add wiki https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/havogt/wiki_template.wiki.git
-        git push wiki master --force
+      run: git push wiki master --force
