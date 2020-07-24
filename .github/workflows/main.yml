@@ -13,5 +13,5 @@ jobs:
 
     - name: publish to wiki
       run: |
-        git remote add wiki git@github.com:havogt/wiki_template.wiki.git
+        git remote add wiki https://${GITHUB_ACTOR}:${INPUT_GITHUB_TOKEN}@github.com/wiki_template.wiki.git.git
         git push wiki master
